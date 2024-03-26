@@ -8,7 +8,7 @@ const app=express();
 app.use(cors());
 app.use(express.json());
 
-const port =8080;
+const port =3000;
 
 const chance=new Chance();
 const animals=[...Array(250).keys()].map(id=>{
