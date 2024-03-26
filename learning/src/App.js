@@ -1,10 +1,12 @@
-import CountDownTimer from "./compoenents.jsx/countdownTimer";
-
+import ErrorBoundary from "./compoenents.jsx/ErrorBoundary";
 
 function App() {
   return (
     <div>
-      <CountDownTimer hr={1} min={45} sec={0}></CountDownTimer>
+    <h3>Outside the error boundary</h3>
+    <ErrorBoundary>
+    <h3>This is inside error Boundary</h3>
+    </ErrorBoundary>
     </div>
   )
 }
