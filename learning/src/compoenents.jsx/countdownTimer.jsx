@@ -48,11 +48,11 @@ const Countdown=({hr,min,sec})=>{
   
 };
 
-function CountDownTimer() {
+const CountDownTimer =({ hr, min, sec })=> {
   
     return (
       <div>
-        <Countdown hr={1} min={45} sec={0} />
+        <Countdown hr={hr} min={min} sec={sec} />
       </div>
     );
   }
