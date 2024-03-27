@@ -5,7 +5,11 @@ import Chance from "chance"
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+    origin: 'https://react-projects-rdre-kj2xf94dx.vercel.app/',
+  };
+  
+app.use(cors(corsOptions)); // Apply CORS middleware with the specified options
 app.use(express.json());
 
 const port = 3000;
