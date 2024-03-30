@@ -1,18 +1,20 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
-import "./navbar.css";
 
 const Navbar = () => {
   return (
-    <div>
-      <nav>
-        <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
-        </ul>
-      </nav>
-    </div>
+    <nav className="flex justify-between bg-violet-800 text-white py-2">
+      <div className="logo">
+        <span className="font-bold text-xl mx-9">iTask</span>
+      </div>
+      <ul className="flex gap-8 mx-9">
+        <li className="cursor-pointer hover:font-bold transition-all duration-50">
+          Home
+        </li>
+        <li className="cursor-pointer hover:font-bold transition-all duration-50">
+          About
+        </li>
+      </ul>
+    </nav>
   );
 };
 
