@@ -1,0 +1,16 @@
+/* body{
+    background-color: red;
+} */
+nav,ul{
+    display: flex;
+}
+li{
+    list-style: none;
+}
+ul{
+    gap: 34px;
+}
+nav{
+    background-color: peachpuff;
+    padding: 23px;
+}
