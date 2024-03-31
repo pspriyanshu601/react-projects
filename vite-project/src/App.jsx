@@ -6,19 +6,26 @@ import { v4 as uuidv4 } from "uuid";
 function App() {
   const [todo, settodo] = useState("");
   const [todos, settodos] = useState([]);
+  const [finished, setfinished] = useState(false);
 
-  useEffect(() => { 
+  useEffect(() => {
     let todostring = localStorage.getItem("todos");
     if (todostring) {
-          let todos = JSON.parse(localStorage.getItem("todos"));
-          settodos(todos);
+      let todos = JSON.parse(localStorage.getItem("todos"));
+      if (finished) {
+        const newTodo = todos.filter((todo) => {
+          return todo.isCompleted === true;
+        });
+        settodos(newTodo);
+      } else {
+        settodos(todos);
+      }
     }
+  }, [finished]);
 
-  }, []);
-  
   const savetoLS = (params) => {
     localStorage.setItem("todos", JSON.stringify(todos));
-  }
+  };
 
   // const handleEdit=() => {
 
@@ -52,7 +59,7 @@ function App() {
     settodos(newTodos);
     savetoLS();
   };
-  const handleEdit = (e,id) => {
+  const handleEdit = (e, id) => {
     let index = todos.findIndex((item) => {
       return item.id === id;
     });
@@ -65,7 +72,10 @@ function App() {
     });
     settodos(newTodos);
     savetoLS();
-  }
+  };
+  const toggleFinished = () => {
+    setfinished(!finished);
+  };
 
   return (
     <>
@@ -81,11 +91,22 @@ function App() {
           />
           <button
             onClick={handleAdd}
-            className="bg-violet-700 hover:bg-violet-800 p-2 py-3 text-sm font-bold text-white rounded-md mx-6"
+            disabled={todo.length <= 3}
+            className="bg-violet-700 hover:bg-violet-800 p-2 py-3 text-sm font-bold text-white rounded-md mx-6 disabled:bg-violet-500"
           >
             Add
           </button>
         </div>
+        <div className="flex p-3">
+          <input
+            className="mx-3"
+            type="checkbox"
+            checked={finished}
+            onChange={toggleFinished}
+          />
+          <h2>Show only finished todos</h2>
+        </div>
+
         <h1 className="text-xl font-bold">Your Todos</h1>
         <div className="todos">
           {todos.map((item) => {
@@ -93,7 +114,7 @@ function App() {
               <div key={item.id} className="todo flex w-1/3 justify-between">
                 <input
                   name={item.id}
-                  value={item.isCompleted}
+                  checked={item.isCompleted}
                   onChange={handleCheckbox}
                   type="checkbox"
                   className=""
